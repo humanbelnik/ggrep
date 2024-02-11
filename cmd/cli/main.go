@@ -10,7 +10,6 @@ import (
 func main() {
 	// Parse flags.
 	flags := cli.ParseFlags()
-	fmt.Println(flags)
 
 	// Parse tokens from CLI arguments.
 	tokens, err := cli.MustTokens()
@@ -18,9 +17,12 @@ func main() {
 		panic(fmt.Errorf("search tokens unspecified: %w", err))
 	}
 
+	// Get repositories.
 	repos, _ := server.BrowseRepositories(tokens)
-	for _, r := range repos.Repos {
-		fmt.Println(r.GetFullName())
+
+	if flags.Language != "" {
+		repos.GetInfoWithLanguage(flags.Language)
+	} else {
+		repos.GetInfoAll()
 	}
-	fmt.Println("found: ", repos.Len, "repositories")
 }

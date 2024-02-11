@@ -7,15 +7,17 @@ import (
 	"strings"
 
 	"github.com/google/go-github/github"
+	"github.com/humanbelnik/ggrep/internal/lib/pretify"
 )
 
 type Repositories struct {
-	Repos []github.Repository
-	Len   int
+	Repos  []github.Repository
+	Len    int
+	Client *github.Client
 }
 
 // BrowseRepositories calls GitHub API
-// to concurrently browse repositories
+// to browse repositories
 // whose names contain all tokens.
 // ! Function contains panic()
 func BrowseRepositories(tokens []string) (*Repositories, error) {
@@ -47,9 +49,34 @@ func BrowseRepositories(tokens []string) (*Repositories, error) {
 	}
 
 	return &Repositories{
-		Repos: repositories,
-		Len:   counter,
+		Repos:  repositories,
+		Len:    counter,
+		Client: client,
 	}, nil
+}
+
+func (r *Repositories) GetInfoAll() {
+	for i, r := range r.Repos {
+		fmt.Printf("%d. [%s]\n", i+1, pretify.WithColor(pretify.Cyan, r.GetFullName()))
+		fmt.Printf("%s %s\n", pretify.WithColor(pretify.LightGray, "Link:"), r.GetHTMLURL())
+		fmt.Printf("%s %s\n\n", pretify.WithColor(pretify.LightGray, "Language:"), pretify.LanguageWithColor(r.GetLanguage()))
+	}
+	fmt.Println("Total:", r.Len)
+
+}
+
+func (r *Repositories) GetInfoWithLanguage(lang string) {
+	i := 0
+	for _, r := range r.Repos {
+		if strings.ToLower(r.GetLanguage()) != lang {
+			continue
+		}
+		fmt.Printf("%d. [%s]\n", i+1, pretify.WithColor(pretify.Cyan, r.GetFullName()))
+		fmt.Printf("%s %s\n", pretify.WithColor(pretify.LightGray, "Link:"), r.GetHTMLURL())
+		fmt.Printf("%s %s\n\n", pretify.WithColor(pretify.LightGray, "Language:"), pretify.LanguageWithColor(r.GetLanguage()))
+		i++
+	}
+	fmt.Println("Total:", i)
 }
 
 func getTokenStr(tokens []string) string {

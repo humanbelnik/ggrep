@@ -3,12 +3,10 @@ package cli
 import (
 	"flag"
 	"fmt"
-)
+	"strings"
 
-type Flag struct {
-	Language string
-	Inspect  string
-}
+	"github.com/humanbelnik/ggrep/internal/model"
+)
 
 // MustTokens parses non-flag CLI argumaments and
 // returns error is there're no arguments.
@@ -23,7 +21,7 @@ func MustTokens() ([]string, error) {
 }
 
 // ParseFlags parses flags from CLI.
-func ParseFlags() *Flag {
+func ParseFlags() model.Flags {
 	var (
 		langFl string
 		inspFl string
@@ -32,8 +30,8 @@ func ParseFlags() *Flag {
 	flag.StringVar(&inspFl, "inspect", "", "specify how deep you can inspect repo's files")
 	flag.Parse()
 
-	return &Flag{
-		Language: langFl,
-		Inspect:  inspFl,
+	return model.Flags{
+		Language: strings.ToLower(langFl),
+		Inspect:  strings.ToLower(inspFl),
 	}
 }
