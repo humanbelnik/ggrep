@@ -10,7 +10,7 @@
 ### B. Pull image and run via Docker
 1. Run to pull container and run shell inside it
     ```shell
-    docker run -it --rm ggrep
+    docker run -it --rm humanbelnik/ggrep
     ```
 ## How to use?
 ### Launch
