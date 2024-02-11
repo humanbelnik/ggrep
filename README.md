@@ -6,7 +6,8 @@
 1. Clone this repository to your local machine
 2. `cd` to cloned repository
 4. Run `chmod +x *.sh`
-5. Launch (`Golang` compiler required)
+5. Launch script (`Golang` compiler required)
+    `<shell_config_file>` can be `~/.zshrc`/`~/.bashrc`/etc
     ```shell
     ./setup.sh <shell_config_file>
     ```
