@@ -18,7 +18,12 @@
     docker run -it --rm humanbelnik/ggrep
     ```
 ## How to use?
-### Launch
+### Launch (if compiled)
+```shell
+ggrep [-lang=<programming_language>] <token1> ... <tokenX>
+```
+
+### Launch (Docker)
 ```shell
 ./ggrep [-lang=<programming_language>] <token1> ... <tokenX>
 ```
