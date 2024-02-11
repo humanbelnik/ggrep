@@ -7,11 +7,9 @@
 2. `cd` to cloned repository
 4. Run `chmod +x *.sh`
 5. Launch script (`Golang` compiler required)
-    `<shell_config_file>` can be `~/.zshrc`/`~/.bashrc`/etc
     ```shell
     ./setup.sh <shell_config_file>
     ```
-    `<shell_config_file>` can be `~/.zshrc`/`~/.bashrc`/etc
 3. Now binary `ggrep` in `/home/bin` created
 
 ### B. Pull image and run via Docker
