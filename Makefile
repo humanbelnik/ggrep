@@ -1,3 +1,6 @@
+
+
 build:
-	go build -o /usr/local/bin/ggrep ./cmd/cli/
+	go build -o ~/bin/ ./cmd/cli
+	echo 
 .PHONY: build
