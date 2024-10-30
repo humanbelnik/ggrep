@@ -1,6 +1,8 @@
 # ggrep
 :mag: CLI utility to quickly browse GitHub repositories
 
+> NOTE: Docker version is stable, but 2nd approach is untested.
+
 ## How to setup?
 ### A. Compile by yourself
 1. Clone this repository to your local machine
